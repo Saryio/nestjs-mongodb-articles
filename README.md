@@ -14,4 +14,6 @@
 ### Type `'yarn'` or `'npm install'`. Automatically will install some dependencies that you need.
 ### To finish, install the NestJS globally using `'npm i -g @nestjs/cli'` and start the application with `'npm run start --watch'` or `'yarn start --watch'`. See the [docs](https://docs.nestjs.com/)
 
+### If you want, you can use dockerfile
+
 ## This is a challange by [__Coodesh__](https://coodesh.com/)
