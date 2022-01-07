@@ -8,8 +8,10 @@ COPY package-lock.json ./
 
 RUN npm install
 
+RUN npm install -g @nestjs/cli
+
 COPY . .
 
 EXPOSE 3000
 
-CMD [ "npm", "run" ,"start:dev" ]
+CMD [ "yarn", "start:dev"]

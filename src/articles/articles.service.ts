@@ -47,7 +47,6 @@ export class ArticlesService {
 
   async findAll(page: number = 1) {
     if (page < 1) page = 1
-    //await this.saveNewArticles()
     const limit = 10
     return this.articleModel.find().limit(limit).skip((page-1)*limit).sort( { id: -1 } )
 
@@ -69,7 +68,7 @@ export class ArticlesService {
       })
   }
 
-  remove(id: string) {
+  remove(id: string): any {
     return this.articleModel.deleteOne({
       _id: id
     }).exec();
