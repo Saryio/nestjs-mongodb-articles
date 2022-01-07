@@ -24,7 +24,7 @@ export class ExternalRequestService {
 
         const start = num
         const url = encodeURI(`https://api.spaceflightnewsapi.net/v3/articles?_limit=${limit}&_sort=id&_start=${start}`)
-        const rawArticles = await await (await axios.get(url)).data
+        const rawArticles = (await axios.get(url)).data
 
         let articles: Object[] = []
         

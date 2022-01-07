@@ -47,7 +47,7 @@ export class ArticlesService {
 
   async findAll(page: number = 1) {
     if (page < 1) page = 1
-    await this.saveNewArticles()
+    //await this.saveNewArticles()
     const limit = 10
     return this.articleModel.find().limit(limit).skip((page-1)*limit).sort( { id: -1 } )
 
@@ -75,7 +75,7 @@ export class ArticlesService {
     }).exec();
   }
 
-  @Cron('0 0 9 * * *')
+  @Cron('0 0 9 * * *') //Every 09:00 AM
   async saveNewArticles() {
 
     const numArticles: number = await this.articleModel.find().count()
