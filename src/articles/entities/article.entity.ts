@@ -6,7 +6,7 @@ export type ArticleDocument = Article & Document;
 @Schema()
 export class Article {
     @Prop()
-    id: string
+    id: number
 
     @Prop()
     featured: boolean

@@ -6,8 +6,10 @@ import { Article, ArticleSchema } from './entities/article.entity';
 import { ExternalRequestService } from './external-request/external-request.service';
 
 @Module({
-  imports: [ExternalRequestService, MongooseModule.forFeature([{ name: Article.name, schema: ArticleSchema }])],
+  imports: [MongooseModule.forFeature([{ name: Article.name, schema: ArticleSchema }])],
   controllers: [ArticlesController],
   providers: [ArticlesService, ExternalRequestService]
 })
-export class ArticlesModule {}
+export class ArticlesModule {
+
+}

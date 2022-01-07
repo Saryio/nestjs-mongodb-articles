@@ -1,7 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, Query } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
+
+type findAllDataType = {
+  page: number
+}
+
 
 @Controller('articles')
 export class ArticlesController {
@@ -13,8 +18,8 @@ export class ArticlesController {
   }
 
   @Get()
-  findAll() {
-    return this.articlesService.findAll();
+  findAll(@Query() { page }: findAllDataType) {
+    return this.articlesService.findAll(+page || undefined);
   }
 
   @Get(':id')

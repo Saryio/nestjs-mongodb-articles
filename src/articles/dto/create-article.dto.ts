@@ -1,5 +1,5 @@
 export class CreateArticleDto {
-    id: string
+    id: number
     featured: boolean
     title: string
     url: string
