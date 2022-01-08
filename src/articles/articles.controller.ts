@@ -23,24 +23,28 @@ export class ArticlesController {
 
   @Get()
   @ApiCreatedResponse({description: "Get articles with pagination"})
+
   findAll(@Query() { page, limit }: findAllDataType) {
     return this.articlesService.findAll(+page || undefined, +limit || undefined);
   }
 
   @Get(':id')
   @ApiCreatedResponse({description: "Get article by ID"})
+
   findOne(@Param('id') id: string) {
     return this.articlesService.findOne(id);
   }
 
   @Put(':id')
   @ApiCreatedResponse({description: "Update an article"})
+
   update(@Param('id') id: string, @Body() updateArticleDto: UpdateArticleDto) {
     return this.articlesService.update(id, updateArticleDto);
   }
 
   @Delete(':id')
   @ApiCreatedResponse({description: "Delete an article"})
+  
   remove(@Param('id') id: string) {
     return this.articlesService.remove(id);
   }

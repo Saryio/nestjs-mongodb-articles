@@ -37,4 +37,11 @@ export class ExternalRequestService {
         return newArticles
     }
 
+    async getAllArticles(){
+        const limit = (await axios.get(`https://api.spaceflightnewsapi.net/v3/articles/count`)).data
+        const articles = (await axios.get(`https://api.spaceflightnewsapi.net/v3/articles?_limit=${limit}`)).data
+
+        return articles
+    }
+
 }

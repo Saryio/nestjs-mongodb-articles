@@ -36,7 +36,7 @@ export class ArticlesService {
   constructor(
     @InjectModel(Article.name) private articleModel: Model<ArticleDocument>,
     private externalRequest: ExternalRequestService
-  ) { }
+  ){}
 
   create(createArticleDto: CreateArticleDto) {
     const article = new this.articleModel(createArticleDto)
@@ -45,7 +45,7 @@ export class ArticlesService {
 
   async findAll(page: number = 1, limit = 10) {
     if (page < 1) page = 1
-    return this.articleModel.find().limit(limit).skip((page-1)*limit).sort( { id: -1 } )
+    return this.articleModel.find().limit(limit).skip((page-1)*limit).sort( { id: -1 })
   }
 
   findOne(id: string) {
@@ -56,7 +56,7 @@ export class ArticlesService {
     return this.articleModel.findByIdAndUpdate( {_id: id}, {$set: updateArticleDto}, {new: true})
   }
 
-  remove(id: string): any {
+  remove(id: string) {
     return this.articleModel.deleteOne({_id: id}).exec();
   }
 
@@ -71,6 +71,14 @@ export class ArticlesService {
     articles.forEach(async (article: CreateArticleDto) => {
       await this.create(article)
     })
+  }
+
+  async saveAllArticles(){
+    const articles = await this.externalRequest.getAllArticles()
+
+    articles.forEach(async (article) => {
+      await this.create(article)
+    });
   }
 
 }
