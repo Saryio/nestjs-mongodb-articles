@@ -10,6 +10,8 @@ RUN npm install
 
 RUN npm install -g @nestjs/cli
 
+RUN yarn
+
 COPY . .
 
 EXPOSE 3000
