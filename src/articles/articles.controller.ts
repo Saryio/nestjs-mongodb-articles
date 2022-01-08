@@ -7,29 +7,7 @@ import { UpdateArticleDto } from './dto/update-article.dto';
 
 type findAllDataType = {
   page: number
-}
-
-type ArticleDataType = {
-  id?: number
-  featured?: boolean
-  title?: string
-  url?: string
-  imageUrl?: string
-  newsSite?: string
-  summary?: string
-  publishedAt?: string
-  launches?: [
-    {
-      id?: string
-      provider?: string
-    }
-  ]
-  events?: [
-    {
-      id?: string
-      provider?: string
-    }
-  ]
+  limit: number
 }
 
 @Controller('articles')
@@ -45,8 +23,8 @@ export class ArticlesController {
 
   @Get()
   @ApiCreatedResponse({description: "Get articles with pagination"})
-  findAll(@Query() { page }: findAllDataType) {
-    return this.articlesService.findAll(+page || undefined);
+  findAll(@Query() { page, limit }: findAllDataType) {
+    return this.articlesService.findAll(+page || undefined, +limit || undefined);
   }
 
   @Get(':id')

@@ -10,14 +10,12 @@ async function bootstrap() {
 
   const options = new DocumentBuilder()
   .setTitle('Back-end Challenge 🏅 2021 - Space Flight News')
-  .setDescription('Articles REST API').setVersion('1.0.0')
+  .setDescription('Articles REST API')
+  .setVersion('1.0.0')
   .build()
 
   const document = SwaggerModule.createDocument(app, options)
   SwaggerModule.setup('api', app, document)
-
-
-
 
   await app.listen(port);
   console.log("\nListening app in port:", port)

@@ -11,7 +11,4 @@ import { ApiProperty } from '@nestjs/swagger';
   controllers: [ArticlesController],
   providers: [ArticlesService, ExternalRequestService]
 })
-export class ArticlesModule {
-
-  
-}
+export class ArticlesModule {}

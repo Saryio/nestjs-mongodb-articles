@@ -3,8 +3,8 @@ import axios from 'axios'
 
 type ArticlesDataParams = {
     start?: number
-    num?: number
-    last?: any
+    numArticles?: number
+    lastArticle?: any
 }
 
 type AxiosResponse = {
@@ -15,25 +15,26 @@ type AxiosResponse = {
 export class ExternalRequestService {
     constructor() {}
 
-    async getArticles({num, last}: ArticlesDataParams) {
+    async getArticles({numArticles, lastArticle}: ArticlesDataParams) {
 
         const numExternalArticles: AxiosResponse = await axios.get(`https://api.spaceflightnewsapi.net/v3/articles/count`)
         
-        let limit = num - numExternalArticles.data
+        let limit = numArticles - numExternalArticles.data
+
         if (limit < 0) limit = limit * -1
 
-        const start = num
+        const start = numArticles
         const url = encodeURI(`https://api.spaceflightnewsapi.net/v3/articles?_limit=${limit}&_sort=id&_start=${start}`)
         const rawArticles = (await axios.get(url)).data
 
-        let articles: Object[] = []
+        let newArticles: Object[] = []
         
         rawArticles.forEach(article => {
-            if (last < article.id){
-                articles.push(article)
+            if (lastArticle < article.id){
+                newArticles.push(article)
             }
         });
-        return articles
+        return newArticles
     }
 
 }

@@ -7,9 +7,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  @ApiCreatedResponse({
-    description: "Get welcome message"
-  })
+  @ApiCreatedResponse({description: "Get welcome message"})
   getMessage(): string {
     return this.appService.getMessage();
   }

@@ -7,7 +7,7 @@ import { UpdateArticleDto } from './dto/update-article.dto';
 import { Article, ArticleDocument } from './entities/article.entity';
 import { ExternalRequestService } from './external-request/external-request.service';
 
-type ArticleDataType = {
+interface ArticleDataType {
   id?: number
   featured?: boolean
   title?: string
@@ -30,8 +30,6 @@ type ArticleDataType = {
   ]
 }
 
-
-
 @Injectable()
 export class ArticlesService {
 
@@ -45,11 +43,9 @@ export class ArticlesService {
     return article.save()
   }
 
-  async findAll(page: number = 1) {
+  async findAll(page: number = 1, limit = 10) {
     if (page < 1) page = 1
-    const limit = 10
     return this.articleModel.find().limit(limit).skip((page-1)*limit).sort( { id: -1 } )
-
   }
 
   findOne(id: string) {
@@ -57,31 +53,20 @@ export class ArticlesService {
   }
 
   update(id: string, updateArticleDto: UpdateArticleDto) {
-    return this.articleModel.findByIdAndUpdate({
-      _id: id
-    },
-      {
-        $set: updateArticleDto
-      },
-      {
-        new: true
-      })
+    return this.articleModel.findByIdAndUpdate( {_id: id}, {$set: updateArticleDto}, {new: true})
   }
 
   remove(id: string): any {
-    return this.articleModel.deleteOne({
-      _id: id
-    }).exec();
+    return this.articleModel.deleteOne({_id: id}).exec();
   }
 
   @Cron('0 0 9 * * *') //Every 09:00 AM
   async saveNewArticles() {
-
     const numArticles: number = await this.articleModel.find().count()
     const lastArticle: ArticleDataType[] = await this.articleModel.find().limit(1).sort({ id: -1 })
     const articles = await this.externalRequest.getArticles({
-      num: numArticles,
-      last: lastArticle[0].id
+      numArticles: numArticles,
+      lastArticle: lastArticle[0].id
     })
     articles.forEach(async (article: CreateArticleDto) => {
       await this.create(article)
