@@ -16,6 +16,17 @@
 
 ### If you want, you can use docker or docker-compose
 
-### The API documentation is in http://localhost:3000/api 
+### The API documentation is in http://localhost:3000/api
+
+## API Routes
+*The docs are in GET /api*
+
+### GET / *'Chalenge name'*
+### GET /api *'Documented API'*
+### GET /articles *'Search for articles'* params: (`limit, page`)
+### POST /articles *'Insert new article'*
+### GET /articles/:id *'Search article by _id'*
+### PUT /articles/:id *'Update articles by _id'*
+### DELETE /articles/:id *'Delete article by _id'*
 
 ## This is a challange by [__Coodesh__](https://coodesh.com/)
