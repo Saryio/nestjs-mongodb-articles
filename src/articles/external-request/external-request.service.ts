@@ -24,24 +24,18 @@ export class ExternalRequestService {
         if (limit < 0) limit = limit * -1
 
         const start = numArticles
-        const url = encodeURI(`https://api.spaceflightnewsapi.net/v3/articles?_limit=${limit}&_sort=id&_start=${start}`)
+        const url = `https://api.spaceflightnewsapi.net/v3/articles?_limit=${limit}&_sort=id&_start=${start}`
         const rawArticles = (await axios.get(url)).data
 
-        let newArticles: Object[] = []
-        
-        rawArticles.forEach(article => {
-            if (lastArticle < article.id){
-                newArticles.push(article)
-            }
-        });
+        const newArticles = rawArticles.map(article=>{
+            if(lastArticle< article.id) return article
+        })
         return newArticles
     }
-
     async getAllArticles(){
         const limit = (await axios.get(`https://api.spaceflightnewsapi.net/v3/articles/count`)).data
         const articles = (await axios.get(`https://api.spaceflightnewsapi.net/v3/articles?_limit=${limit}`)).data
 
         return articles
     }
-
 }
