@@ -13,6 +13,7 @@ type AxiosResponse = {
 
 @Injectable()
 export class ExternalRequestService {
+    
     constructor() {}
 
     async getArticles({numArticles, lastArticle}: ArticlesDataParams) {
@@ -30,6 +31,7 @@ export class ExternalRequestService {
         const newArticles = rawArticles.map(article=>{
             if(lastArticle< article.id) return article
         })
+        
         return newArticles
     }
     async getAllArticles(){
