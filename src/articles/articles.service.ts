@@ -60,7 +60,7 @@ export class ArticlesService {
     return this.articleModel.deleteOne({_id: id}).exec();
   }
 
-  @Cron('0 41 22 * * *') //Every 09:00 AM
+  @Cron('0 0 9 * * *') //Every 09:00 AM
   async saveNewArticles() {
     console.log("salvando novos artigos")
     const numArticles: number = await this.articleModel.find().count()
