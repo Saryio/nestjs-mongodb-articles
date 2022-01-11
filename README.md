@@ -30,3 +30,7 @@
 ### DELETE /articles/:id *'Delete article by _id'*
 
 ## This is a challange by [__Coodesh__](https://coodesh.com/)
+Database:
+* MongoDB with Mongoose
+
+You have to create your own database
